@@ -43,13 +43,29 @@ const person = new Client('Saalih', 700)
 
 
 console.log(person.clientInfo());
-
 person.withdraw(400);
 console.log(person.clientInfo());
 person.deposit(900);
 
-console.log(person.clientInfo());
-console.log(person.getBalance());
 
 
 // 
+function Business(n, b, p, c){
+    Client.call(this, n,b )
+    this.phone = p;
+    this.category = c;
+    
+}
+
+// to inherit prototype/methods from Client Constructor
+Business.prototype = Object.create(Client.prototype);
+
+
+//to return Business as constructor instead of just object
+Business.prototype.constructor = Business;
+
+
+const business = new Business('Udemy', 2000000, 23355555555,'Education')
+
+console.log(business);
+console.log(business.clientInfo());
