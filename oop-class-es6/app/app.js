@@ -61,4 +61,27 @@ console.log(person.clientInfo());
 console.log(Client.welcome());
 
 
-// 
+//extending the constructor of Client to Business
+
+class Business extends Client{
+    constructor(n, b, p, c){
+        super(n,b);
+        this.phone = p;
+        this.category =c;
+    }
+
+    clientInfo(){
+       return `Name:  ${this.name}, Balance: ${this.balance}, Phone: ${this.phone}, Category: ${this.category}`
+    }
+
+    clientInfo(){
+        return 'Welcome to banking for business,' + this.name
+    }
+
+
+}
+
+const business1 = new Business('TechGarage', 400000, 233555666888, 'Technology')
+
+console.log(business1);
+console.log(business1.clientInfo());
