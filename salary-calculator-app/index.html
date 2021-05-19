@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Salary</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/all.min.css ">
+    <link rel="stylesheet" href="css/style.css ">
+    <style>
+        .container{
+            width: 400px;
+        }
+
+        @media screen and (max-width: 500px) {
+            .container{
+            width: 460px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="display-5 text-center">
+            <i class="fas fa-calculator text-danger"></i> 
+            <span class="text-primary">Calculate</span> 
+            <span class="text-danger">Salary</span></h1>
+
+        <form id="form" >
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="id">ID</label>
+                        <input type="text" id="id" class="form-control">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="off">LeavTaken</label>
+                        <input type="text" id="off" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="wday">#Working Days</label>
+                        <input type="text" id="wday" class="form-control">
+                    </div>
+                </div>
+            </div>
+            
+            <input type="submit" value="Check Salary" id="" class="btn btn-danger btn-block">
+        </form>
+
+        <table class="table table-striped mt-5">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Salary</th>
+                    <th></th>
+                </tr>
+                
+            </thead>
+            <tbody class="results">
+               <!-- table data goes here!! JS -->
+            </tbody>
+        </table>
+    </div>
+
+
+    <script src="index.js"></script>
+</body>
+</html>
