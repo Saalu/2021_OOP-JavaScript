@@ -11,20 +11,8 @@ class Book {
 class UI {
 
     static displayBooks(){
-        const StoreBooks = [
-            {
-                title: 'Book One',
-                author: 'Nii Armah',
-                isbn: '352224'
-            },
-            {
-                title: 'Book One',
-                author: 'Kwasi Larbie',
-                isbn: '522324'
-            }
-        ];
-
-        const books = StoreBooks;
+      
+        const books = Storage.getBooks();
 
         books.forEach((book)=> UI.addBookToList(book))
     }
@@ -65,6 +53,42 @@ class UI {
     }
 }
 
+class Storage {
+    //LocalStorage:
+    // when we pull it out, we parse it
+    //when send it, we stringify it
+    static getBooks(){
+        let books;
+        if(localStorage.getItem('books') === null) {
+            books = [];
+        }else{
+            books = JSON.parse(localStorage.getItem('books'));
+        }
+
+        return books;
+    }
+    static addBook(book){
+        const books = Storage.getBooks();
+
+        books.push(book);
+
+        localStorage.setItem('books', JSON.stringify(books));
+    }
+    static removeBook(isbn){
+        const books = Storage.getBooks();
+
+        books.forEach((book, index) => {
+            if(book.isbn === isbn){
+                books.splice(index, 1);
+            }
+        });
+
+        localStorage.setItem('books', JSON.stringify(books));
+        
+    }
+}
+
+
 //HTML Elements Selection
 const listElement = document.querySelector('#book-list'); //'tbody' element
 const form = document.querySelector('#book-form');
@@ -85,6 +109,8 @@ form.addEventListener('submit', e => {
         const book = new Book(title,author,isbn);
         //add inputs to UI method
         UI.addBookToList(book)
+        //add inputs to storage method
+        Storage.addBook(book)
         
         UI.showAlert('Added a book successfully', 'success')  
         
@@ -94,13 +120,16 @@ form.addEventListener('submit', e => {
 })
 
 // EVENT: To Display the Books
-document.addEventListener('DOMContentLoaded', UI.displayBooks)
+document.addEventListener('DOMContentLoaded', UI.displayBooks())
 
 
 // EVENT PROPAGATION: Remove a book
 listElement.addEventListener('click', e => {
     //pass targeted element to UI method
     UI.deleteBook(e.target)
+    //with this we need to traverse the DOM for the previous element
+    Storage.removeBook(e.target.parentElement.previousElementSibling.textContent)
+
     UI.showAlert('Deleted a book successfully', 'success')  
 
 })
