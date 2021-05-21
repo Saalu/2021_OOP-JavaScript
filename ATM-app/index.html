@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATM </title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/all.min.css ">
+    <link rel="stylesheet" href="css/style.css ">
+    <style>
+        .container{
+            width: 400px;
+        }
+
+        @media screen and (max-width: 500px) {
+            .container{
+            width: 460px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="display-5 text-center">
+            <i class="fas fa-calculator text-danger"></i> 
+            <span class="text-primary">Bank</span> 
+            <span class="text-danger">Account</span></h1>
+
+        <form id="form" >
+            <div class=" mt-5">
+                <div class="form-group">
+                    <input type="text" id="accno" class="form-control" placeholder="Eg. 222224445555">
+                </div>
+                <div class="form-group">
+                    <input type="text" id="name" class="form-control" placeholder="Eg. Mensah">
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col">
+                    <div class="form-group">
+                        <input type="text" id="deposit" class="form-control" placeholder="Eg. 100">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="withdraw" class="form-control" placeholder="Eg. 50">
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="form-group">
+                    <input type="submit" value="Deposit Balance" id="deposit-btn" class="btn btn-primary btn-block">
+                      
+                    </div>
+                    <div class="form-group">
+                    <input type="submit" value="Withdraw Balance" id="withdraw-btn" class="btn btn-danger btn-block">
+                      
+                    </div>                          
+                </div>
+            </div>
+            
+            <input type="submit" value="Check Balance" id="check-btn" class="btn btn-success btn-block">
+        </form>
+
+        <table class="table table-striped mt-5">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Prev. Balance</th>
+                    <th>Balance</th>
+                </tr>
+                
+            </thead>
+            <tbody class="results">
+               <!-- table data goes here!! JS -->
+            </tbody>
+        </table>
+    </div>
+
+
+    <script src="index.js"></script>
+</body>
+</html>

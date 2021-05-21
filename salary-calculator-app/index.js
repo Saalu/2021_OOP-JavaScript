@@ -1,4 +1,5 @@
 
+
 class Employee{
 
     constructor(id, name){
@@ -104,5 +105,6 @@ form.addEventListener('submit', e => {
 // console.log(emp);
 
 document.addEventListener('DOMContentLoaded', () => UI.displayEmployeeInfo())
+
 
 
