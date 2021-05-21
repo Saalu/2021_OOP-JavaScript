@@ -4,15 +4,13 @@ class Employee{
     constructor(id, name){
         this.id = id;
         this.name = name;
-        this.workingHoursPerDay = 8;
-        this.hourlyRate = 15;
         this.workingDays;
+        this.salary;
     }
 
-    static getSalaryAmount(totalDays, totalLeave){
-        // const work = this.workingDays = Number(totalDays) - Number(totalLeave);
+        getSalaryAmount(totalLeave,totalDays){
         const work = this.workingDays = totalDays - totalLeave;
-        let salary = work *8 *15;
+        const salary = this.salary = work *8 *15;
 
         return salary
 
@@ -24,20 +22,58 @@ class Employee{
 
 class UI {
 
-    static displayEmployee(id,name, salary){
-    const element = document.querySelector('.results')
+    static displayEmployeeInfo(){
+        const emps = Store.getSalary()
 
-    const row = document.createElement('tr');
-    row.innerHTML = `
-        <td> ${id}</td>
-        <td> ${name}</td>
-        <td> ${salary}</td>
-    `;
+        emps.forEach(emp => UI.addEmployee(emp) )
+    }
 
-    element.appendChild(row);
+    static addEmployee(emp){
+        const element = document.querySelector('.results')
+        
+        const row = document.createElement('tr');
+        row.innerHTML = `
+        <td> ${emp.id}</td>
+        <td> ${emp.name}</td>
+        <td> ${emp.workingDays}</td>
+        <td> ${emp.salary}</td>
+        `;
+        
+        element.appendChild(row);
+    }
+    
 }
 
+
+class Store {
+
+    static getSalary(){
+        let employees;
+        
+        if(localStorage.getItem('employees') === null){
+            employees = [];
+        }else{
+            employees = JSON.parse(localStorage.getItem('employees'))
+        }
+        
+        return employees;
+        
+    }
+    static addSalary(emp){
+        let employees = Store.getSalary()
+        
+        employees.push(emp)
+        
+        localStorage.setItem('employees', JSON.stringify(employees))
+        
+    }
+    static removeSalary(){}
 }
+
+
+
+
+
 
 const form = document.getElementById('form')
 //Adding a book via the FORM
@@ -48,12 +84,16 @@ form.addEventListener('submit', e => {
     const name = document.getElementById('name').value;
     const leave = document.getElementById('off').value;
     const workdays = document.getElementById('wday').value;
-
-    console.log(leave, workdays);
-
-   const salary = Employee.getSalaryAmount(workdays, leave)
     
-   UI.displayEmployee(id, name, salary)
+    const emp = new Employee(id, name)
+    emp.getSalaryAmount(leave, workdays)
+    
+    //  employee.getSalaryAmount(workdays, leave)
+    Store.addSalary(emp)
+    
+    UI.addEmployee(emp)
+    
+    //    Store.addSalary()
     //Clear Form fields
     form.reset()
 })
@@ -63,8 +103,6 @@ form.addEventListener('submit', e => {
 
 // console.log(emp);
 
+document.addEventListener('DOMContentLoaded', () => UI.displayEmployeeInfo())
 
 
-
-    
-    
